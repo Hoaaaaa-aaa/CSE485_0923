@@ -37,6 +37,9 @@
     footer{
         border: 1px solid black;
     }
+    h5{
+        color:blue;
+    }
 </style>
 <body>
     <header>
@@ -49,7 +52,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#"><b>TRANG CHỦ</b></a>
+                            <a class="nav-link active" aria-current="page" href="index.php"><b>TRANG CHỦ</b></a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#"><b>ĐĂNG NHẬP</b></a>
@@ -63,19 +66,25 @@
             </div>
         </nav>
     </header>
-    <div class = "Info">
-        <img src="images/songs/cayvagio.jpg" class="img-thumb" alt="...">
-        <div>
-            <h5>Cây và gió</h5>
-            <p><b>Bài hát: </b> Cây và gió</p>
-            <p><b>Thể loại: </b> Nhạc trữ tình</p>
-            <p><b>Tóm tắt: </b>  Em và anh hai đứa quen nhau thật tình cờ. Lởi hát của anh từ bài hát "Cây và gió đã làm tâm hôn em xao
-            động. Nhưng sự thật phũ phàng rằng em chưa bao giờ nói cho anh biết những suy nghĩ tận sau trong tim mình. Bởi vì em nhút nhát,
-            em không dám đối mặt với thực tế khắc nghiệt, hay thực ra em không dám đối diện với chính mình.</p>
-            <p><b>Nội dung: </b>  Em và anh hai đứa quen nhau thật tình cờ. Lởi hát của anh từ bài hát "Cây và gió đã làm tâm hôn em xao
-            động. Nhưng sự thật phũ phàng rằng em chưa bao giờ nói cho anh biết những suy nghĩ tận sau trong tim mình. Bởi vì em nhút nhát,
-            em không dám đối mặt với thực tế khắc nghiệt, hay thực ra em không dám đối diện với chính mình.</p>
-            <p><b>Tác giả: </b> Nguyễn Văn Giả</p>
+    <div class="card mb-3 m-5" style="max-width: 100%; border:0;">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img src="images/songs/cayvagio.jpg" class="img-fluid" alt="...">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                <h5>Cây và gió</h5>
+                <p><b>Bài hát: </b> Cây và gió</p>
+                    <p><b>Thể loại: </b> Nhạc trữ tình</p>
+                    <p><b>Tóm tắt: </b>  Em và anh hai đứa quen nhau thật tình cờ. Lởi hát của anh từ bài hát "Cây và gió đã làm tâm hôn em xao
+                    động. Nhưng sự thật phũ phàng rằng em chưa bao giờ nói cho anh biết những suy nghĩ tận sau trong tim mình. Bởi vì em nhút nhát,
+                    em không dám đối mặt với thực tế khắc nghiệt, hay thực ra em không dám đối diện với chính mình.</p>
+                    <p><b>Nội dung: </b>  Em và anh hai đứa quen nhau thật tình cờ. Lởi hát của anh từ bài hát "Cây và gió đã làm tâm hôn em xao
+                    động. Nhưng sự thật phũ phàng rằng em chưa bao giờ nói cho anh biết những suy nghĩ tận sau trong tim mình. Bởi vì em nhút nhát,
+                    em không dám đối mặt với thực tế khắc nghiệt, hay thực ra em không dám đối diện với chính mình.</p>
+                    <p><b>Tác giả: </b> Nguyễn Văn Giả</p>
+                </div>
+            </div>
         </div>
     </div>
     <footer>

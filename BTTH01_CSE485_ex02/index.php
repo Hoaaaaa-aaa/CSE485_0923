@@ -25,6 +25,10 @@
     footer{
         border: 1px solid black;
     }
+    a{
+        text-decoration: none;
+        color:blue;
+    }
     .color, .card-title{
         color:blue;
     }
@@ -43,7 +47,7 @@
                             <a class="nav-link active" aria-current="page" href="#"><b>TRANG CHỦ</b></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#"><b>ĐĂNG NHẬP</b></a>
+                            <a class="nav-link" href="login.php"><b>ĐĂNG NHẬP</b></a>
                         </li>
                     </ul>
                     <form class="d-flex" role="search">
@@ -82,7 +86,7 @@
                 <div class="card">
                     <img src="images/songs/cayvagio.jpg" class="card-img-top" alt="...">
                     <div class="card-body">
-                        <h5 class="card-title">Cây, lá và gió</h5>
+                        <h5 class="card-title"><a href = "detail.php">Cây, lá và gió</a></h5>
                     </div>
                 </div>
             </div>
