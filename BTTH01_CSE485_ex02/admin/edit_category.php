@@ -21,6 +21,9 @@
     .nav-link{
         color:#9f9f9f;
     }
+    .Edit{
+        margin: 60px 80px 10px 80px;
+    }
 </style>
 <body>
     <header>
@@ -33,13 +36,13 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#"><b>Trang chủ</b></a>
+                            <a class="nav-link" href="index.php"><b>Trang chủ</b></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#"><b>Trang ngoài</b></a>
+                            <a class="nav-link" href="/Laravel/Pro3/BTTH01_CSE485_ex02/index.php"><b>Trang ngoài</b></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#"><b>Thể loại</b></a>
+                            <a class="nav-link active" aria-current="page" href="#"><b>Thể loại</b></a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#"><b>Tác giả</b></a>
@@ -52,11 +55,23 @@
             </div>
         </nav>
     </header>
-    <div>
-        
+    <div class = "Edit">
+        <center><h2>Sửa thông tin thể loại</h2></center>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Mã thể loại</span>
+            <input type="text" class="form-control" placeholder="" aria-label="Id" aria-describedby="basic-addon1">
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Tên thể loại</span>
+            <input type="text" class="form-control" placeholder="" aria-label="Name" aria-describedby="basic-addon1">
+        </div>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end" style="margin-bottom: 60px;">
+            <a href=""><button class="btn btn-success" type = "submit">Lưu lại</button></a>
+            <a href="category.php"><button class="btn btn-warning" type = "reset">Quay lại</button></a>
+        </div>
     </div>
     <footer>
-        <center><h2>TLU'S MUSIC GARDEN</h2></center>
+        <center><h3>TLU'S MUSIC GARDEN</h3></center>
     </footer>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

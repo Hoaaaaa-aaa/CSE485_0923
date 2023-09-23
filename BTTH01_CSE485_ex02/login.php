@@ -31,7 +31,17 @@
         border-radius: 5px; 
         background-color: #7f7f7f;
         margin: 3px auto;
-        padding: 10px 10px;
+        padding: 10px;
+    }
+    h3, .input-group{
+        padding: 6px 0px;
+    }
+    p{
+        margin: 0;
+    }
+    p a{
+        text-decoration: none;
+        color: #ffc107;
     }
     footer{
         border: 1px solid black;
@@ -79,6 +89,12 @@
                     Remember Me
                 </label>
             </div>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end" style="margin-bottom: 60px;">
+                <a href="admin/index.php"><button class="btn btn-warning" type = "submit">Login</button></a>
+            </div>
+            <hr>
+            <center><p>Don't have an account? <a href="#">Sign Up</a></p>
+            <p><a href = "#">Forgot your password?</a></p></center>
         </div>
     </div>
     <footer>

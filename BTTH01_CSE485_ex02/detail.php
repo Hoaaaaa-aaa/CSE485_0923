@@ -55,7 +55,7 @@
                             <a class="nav-link active" aria-current="page" href="index.php"><b>TRANG CHỦ</b></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#"><b>ĐĂNG NHẬP</b></a>
+                            <a class="nav-link" href="login.php"><b>ĐĂNG NHẬP</b></a>
                         </li>
                     </ul>
                     <form class="d-flex" role="search">

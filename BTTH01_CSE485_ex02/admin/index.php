@@ -21,6 +21,17 @@
     .nav-link{
         color:#9f9f9f;
     }
+    .card-body, .card-subtitle {
+        margin: 10px auto;
+        text-align: center;
+    }
+    .card{
+        margin: 60px 10px;
+        width: 22%;
+    }
+    .card-title{
+        color: blue;
+    }
 </style>
 <body>
     <header>
@@ -36,7 +47,7 @@
                             <a class="nav-link active" aria-current="page" href="#"><b>Trang chủ</b></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#"><b>Trang ngoài</b></a>
+                            <a class="nav-link" href="/Laravel/Pro3/BTTH01_CSE485_ex02/index.php"><b>Trang ngoài</b></a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="category.php"><b>Thể loại</b></a>
@@ -52,11 +63,34 @@
             </div>
         </nav>
     </header>
-    <div>
-        
+    <div class="row row-cols-1 row-cols-md-3 g-4" style = "margin-left: 3%;">
+        <div class="card">
+            <div class="card-body">
+                <h6 class="card-title">Người dùng</h6>
+                <h4 class="card-subtitle mb-2 text-bg-blue">100</h4>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h6 class="card-title">Thể loại</h4>
+                <h4 class="card-subtitle mb-2 text-bg-blue">100</h4>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h6 class="card-title">Tác giả</h3>
+                <h4 class="card-subtitle mb-2 text-bg-blue">100</h4>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h6 class="card-title">Bài viết</h6>
+                <h4 class="card-subtitle mb-2 text-bg-blue">100</h4>
+            </div>
+        </div>
     </div>
     <footer>
-        <center><h2>TLU'S MUSIC GARDEN</h2></center>
+        <center><h3>TLU'S MUSIC GARDEN</h3></center>
     </footer>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

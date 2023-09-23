@@ -21,6 +21,9 @@
     .nav-link{
         color:#9f9f9f;
     }
+    .Edit{
+        margin: 60px 80px 10px 80px;
+    }
 </style>
 <body>
     <header>
@@ -36,7 +39,7 @@
                             <a class="nav-link" href="index.php"><b>Trang chủ</b></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#"><b>Trang ngoài</b></a>
+                            <a class="nav-link" href="/Laravel/Pro3/BTTH01_CSE485_ex02/index.php"><b>Trang ngoài</b></a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="#"><b>Thể loại</b></a>
@@ -52,11 +55,35 @@
             </div>
         </nav>
     </header>
-    <div>
-        
+    <div class = "Edit">
+        <a href="add_category.php"><button class="btn btn-success" type = "submit">Thêm mới</button></a>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Tên thể loại</th>
+                    <th scope="col">Sửa</th>
+                    <th scope="col">Xoá</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td><a href= "edit_category.php"><i class="bi bi-pencil-square"></a></i></td>
+                    <td><a href= ""><i class="bi bi-trash3-fill"></a></i></td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td><a href= "edit_category.php"><i class="bi bi-pencil-square"></a></i></td>
+                    <td><a href= ""><i class="bi bi-trash3-fill"></a></i></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
     <footer>
-        <center><h2>TLU'S MUSIC GARDEN</h2></center>
+        <center><h3>TLU'S MUSIC GARDEN</h3></center>
     </footer>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
