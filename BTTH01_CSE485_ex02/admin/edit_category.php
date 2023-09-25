@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->execute();
 
         // Chuyển hướng trở lại index.php sau khi cập nhật
-        header("Location: index.php");
+        header("Location: category.php");
         exit();
     } catch (PDOException $e) {
         echo "Kết nối thất bại: " . $e->getMessage();
@@ -116,7 +116,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <input type="text" class="form-control" name = "ten_tloai" value="<?= $theloai[1];?>" required>
             </div>
             <div class="d-grid gap-2 d-md-flex justify-content-md-end" style="margin-bottom: 60px;">
-                <a href = "category.php"><button class="btn btn-success" type = "submit" name="Save" value="Lưu lại">Lưu lại</button></a>
+                <button class="btn btn-success" type = "submit" name="Save" value="Lưu lại">Lưu lại</button>
                 <button class="btn btn-warning" type="button" onclick="goBack()">Quay lại</button>
                 <script>
                     function goBack() {

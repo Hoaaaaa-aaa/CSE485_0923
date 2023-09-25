@@ -1,3 +1,33 @@
+<?php
+    try {
+        $conn = new PDO('mysql:host=localhost;dbname=btth01_cse485', 'root', '');
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        // Truy vấn để đếm số lượng người dùng
+        $stmt_users = $conn->prepare("SELECT COUNT(*) FROM users");
+        $stmt_users->execute();
+        $user_count = $stmt_users->fetchColumn();
+
+        // Truy vấn để đếm số lượng thể loại
+        $stmt_categories = $conn->prepare("SELECT COUNT(*) FROM theloai");
+        $stmt_categories->execute();
+        $category_count = $stmt_categories->fetchColumn();
+
+        // Truy vấn để đếm số lượng tác giả
+        $stmt_authors = $conn->prepare("SELECT COUNT(*) FROM tacgia");
+        $stmt_authors->execute();
+        $author_count = $stmt_authors->fetchColumn();
+
+        // Truy vấn để đếm số lượng bài viết
+        $stmt_posts = $conn->prepare("SELECT COUNT(*) FROM baiviet");
+        $stmt_posts->execute();
+        $post_count = $stmt_posts->fetchColumn();
+
+    } catch (PDOException $e) {
+        echo "Kết nối thất bại: " . $e->getMessage();
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -67,25 +97,25 @@
         <div class="card">
             <div class="card-body">
                 <h6 class="card-title">Người dùng</h6>
-                <h4 class="card-subtitle mb-2 text-bg-blue">100</h4>
+                <h4 class="card-subtitle mb-2 text-bg-blue"><?= $user_count ?></h4>
             </div>
         </div>
         <div class="card">
             <div class="card-body">
                 <h6 class="card-title">Thể loại</h4>
-                <h4 class="card-subtitle mb-2 text-bg-blue">100</h4>
+                <h4 class="card-subtitle mb-2 text-bg-blue"><?= $category_count ?></h4>
             </div>
         </div>
         <div class="card">
             <div class="card-body">
                 <h6 class="card-title">Tác giả</h3>
-                <h4 class="card-subtitle mb-2 text-bg-blue">100</h4>
+                <h4 class="card-subtitle mb-2 text-bg-blue"><?= $author_count ?></h4>
             </div>
         </div>
         <div class="card">
             <div class="card-body">
                 <h6 class="card-title">Bài viết</h6>
-                <h4 class="card-subtitle mb-2 text-bg-blue">100</h4>
+                <h4 class="card-subtitle mb-2 text-bg-blue"><?= $post_count ?></h4>
             </div>
         </div>
     </div>

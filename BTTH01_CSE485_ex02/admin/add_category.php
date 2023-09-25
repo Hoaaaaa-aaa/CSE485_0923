@@ -1,3 +1,46 @@
+<?php
+// Nhận dữ liệu từ form khi gửi POST request
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Lấy và kiểm tra dữ liệu từ biểu mẫu
+    $ten_tloai = $_POST["ten_tloai"];
+
+    try {
+        $conn = new PDO('mysql:host=localhost;dbname=btth01_cse485', 'root', '');
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        // Truy vấn kiểm tra xem tên thể loại đã tồn tại hay chưa
+        $sql_check = "SELECT COUNT(*) FROM theloai WHERE ten_tloai = '$ten_tloai'";
+        $stmt_check = $conn->prepare($sql_check);
+        $stmt_check->execute();
+
+        $rowCount = $stmt_check->fetchColumn();
+
+        if ($rowCount > 0) {
+            $reponse = "Tên thể loại đã tồn tại";
+            header("Location: category.php?reponse=" . urlencode($reponse));
+            exit(); // Dừng thực hiện script sau khi chuyển hướng
+        } else {
+            // Thêm thể loại mới vào cơ sở dữ liệu
+            $sql_insert = "INSERT INTO theloai (ten_tloai) VALUES (:ten_tloai)";
+            $stmt_insert = $conn->prepare($sql_insert);
+            $stmt_insert->bindParam(":ten_tloai", $ten_tloai, PDO::PARAM_STR);
+            $stmt_insert->execute();
+
+            $rowCount = $stmt_insert->rowCount();
+
+            if ($rowCount > 0) {
+                $reponse = "Đã thêm thành công thể loại mới";
+                header("Location: category.php?reponse=" . urlencode($reponse));
+                exit();
+            }
+        }
+    } catch (PDOException $e) {
+        echo $e->getMessage();
+    }
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -57,14 +100,26 @@
     </header>
     <div class = "Edit">
         <center><h2>Thêm mới thể loại</h2></center>
-        <div class="input-group mb-3">
-            <span class="input-group-text" id="basic-addon1">Tên thể loại</span>
-            <input type="text" class="form-control" placeholder="" aria-label="Name" aria-describedby="basic-addon1">
-        </div>
-        <div class="d-grid gap-2 d-md-flex justify-content-md-end" style="margin-bottom: 60px;">
-            <a href=""><button class="btn btn-success" type = "submit">Thêm</button></a>
-            <a href="category.php"><button class="btn btn-warning" type = "reset">Quay lại</button></a>
-        </div>
+        <?php
+            if(isset($_GET['error'])){
+                echo "<p style='background-color:red'>{$_GET['error']}</p>";
+            }
+        ?>
+        <form action="add_category.php" method="POST">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Tên thể loại</span>
+                <input type="text" class="form-control" name = "ten_tloai" required>
+            </div>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end" style="margin-bottom: 60px;">
+                <button class="btn btn-success" type = "submit" name="Add" value="Thêm">Thêm</button>
+                <button class="btn btn-warning" type="button" onclick="goBack()">Quay lại</button>
+                <script>
+                    function goBack() {
+                        window.history.back();
+                    }
+                </script>
+            </div>
+        </form>
     </div>
     <footer>
         <center><h2>TLU'S MUSIC GARDEN</h2></center>
