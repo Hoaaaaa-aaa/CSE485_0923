@@ -1,3 +1,47 @@
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Lấy và kiểm tra dữ liệu từ biểu mẫu
+    $ma_tloai = $_POST["ma_tloai"];
+    $ten_tloai = $_POST["ten_tloai"];
+
+    // Cập nhật thông tin thể loại trong cơ sở dữ liệu sử dụng SQL
+    try {
+        $conn = new PDO('mysql:host=localhost;dbname=btth01_cse485', 'root', '');
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        $sql = "UPDATE theloai SET ten_tloai = :ten_tloai WHERE ma_tloai = :ma_tloai";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(":ten_tloai", $ten_tloai, PDO::PARAM_STR);
+        $stmt->bindParam(":ma_tloai", $ma_tloai, PDO::PARAM_INT);
+        $stmt->execute();
+
+        // Chuyển hướng trở lại index.php sau khi cập nhật
+        header("Location: index.php");
+        exit();
+    } catch (PDOException $e) {
+        echo "Kết nối thất bại: " . $e->getMessage();
+    }
+} else {
+    // Hiển thị biểu mẫu để chỉnh sửa thông tin thể loại
+    // Lấy thông tin thể loại sử dụng $_GET["id"] và điền vào các trường của biểu mẫu
+    $ma_tloai = $_GET["id"];
+
+    try {
+        $conn = new PDO('mysql:host=localhost;dbname=btth01_cse485', 'root', '');
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        $sql = "SELECT * FROM theloai WHERE ma_tloai = :ma_tloai";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(":ma_tloai", $ma_tloai, PDO::PARAM_INT);
+        $stmt->execute();
+
+        $theloai = $stmt->fetch();
+    } catch (PDOException $e) {
+        echo "Kết nối thất bại: " . $e->getMessage();
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -57,18 +101,30 @@
     </header>
     <div class = "Edit">
         <center><h2>Sửa thông tin thể loại</h2></center>
-        <div class="input-group mb-3">
-            <span class="input-group-text" id="basic-addon1">Mã thể loại</span>
-            <input type="text" class="form-control" placeholder="" aria-label="Id" aria-describedby="basic-addon1">
-        </div>
-        <div class="input-group mb-3">
-            <span class="input-group-text" id="basic-addon1">Tên thể loại</span>
-            <input type="text" class="form-control" placeholder="" aria-label="Name" aria-describedby="basic-addon1">
-        </div>
-        <div class="d-grid gap-2 d-md-flex justify-content-md-end" style="margin-bottom: 60px;">
-            <a href=""><button class="btn btn-success" type = "submit">Lưu lại</button></a>
-            <a href="category.php"><button class="btn btn-warning" type = "reset">Quay lại</button></a>
-        </div>
+        <?php
+            if(isset($_GET['error'])){
+                echo "<p style='background-color:red'>{$_GET['error']}</p>";
+            }
+        ?>
+        <form action="edit_category.php" method="POST">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Mã thể loại</span>
+                <input type="text" class="form-control" name = "ma_tloai" value="<?= $theloai[0];?>" readonly>
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Tên thể loại</span>
+                <input type="text" class="form-control" name = "ten_tloai" value="<?= $theloai[1];?>" required>
+            </div>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end" style="margin-bottom: 60px;">
+                <a href = "category.php"><button class="btn btn-success" type = "submit" name="Save" value="Lưu lại">Lưu lại</button></a>
+                <button class="btn btn-warning" type="button" onclick="goBack()">Quay lại</button>
+                <script>
+                    function goBack() {
+                        window.history.back(); // Quay lại trang trước đó trong lịch sử trình duyệt
+                    }
+                </script>
+            </div>
+        </form>
     </div>
     <footer>
         <center><h3>TLU'S MUSIC GARDEN</h3></center>

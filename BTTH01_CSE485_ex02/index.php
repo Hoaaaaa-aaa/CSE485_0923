@@ -1,3 +1,17 @@
+<?php 
+    try {
+        $conn = new PDO('mysql:host=localhost;dbname=btth01_cse485', 'root', '');
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        $sql = "SELECT * FROM baiviet ORDER BY ma_bviet";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+
+        $data = $stmt->fetchAll();
+    } catch(PDOException $e) {
+        echo "Connection failed: " . $e->getMessage();
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,6 +38,7 @@
 }
     footer{
         border: 1px solid black;
+        margin-top: 10px;
     }
     a{
         text-decoration: none;
@@ -82,47 +97,17 @@
     <div>
         <center><div><h2 class = "color">TOP BÀI HÁT YÊU THÍCH</h2></div></center>
         <div class="row row-cols-1 row-cols-md-4 g-4">
-            <div class="col">
+        <?php 
+            foreach($data as $value): ?>
+                <div class="col">
                 <div class="card">
-                    <img src="images/songs/cayvagio.jpg" class="card-img-top" alt="...">
+                    <img src= "<?= $value['hinhanh'];?>" class="card-img-top" alt="...">
                     <div class="card-body">
-                        <h5 class="card-title"><a href = "detail.php">Cây, lá và gió</a></h5>
+                        <h5 class="card-title"><a href = "detail.php?ma_bviet=<?= $value['ma_bviet'];?>"><?= $value['ten_bhat']?></a></h5>
                     </div>
                 </div>
             </div>
-            <div class="col">
-                <div class="card">
-                    <img src="images/songs/csmt.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Cuộc sống mến thương</h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card">
-                    <img src="images/songs/longme.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Lòng mẹ</h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card">
-                    <img src="images/songs/phoipha.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Phôi pha</h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card">
-                    <img src="images/songs/noitinhyeubatdau.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Nơi tình yêu bắt đầu</h5>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <?php endforeach; ?>
     </div>
     <footer>
         <center><h2>TLU'S MUSIC GARDEN</h2></center>

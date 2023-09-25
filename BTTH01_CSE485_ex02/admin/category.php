@@ -1,3 +1,18 @@
+<?php 
+    try {
+        $conn = new PDO('mysql:host=localhost;dbname=btth01_cse485', 'root', '');
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        $sql = "SELECT * FROM theloai ORDER BY ma_tloai";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+
+        $data = $stmt->fetchAll();
+    } catch(PDOException $e) {
+        echo "Connection failed: " . $e->getMessage();
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -67,18 +82,15 @@
                 </tr>
             </thead>
             <tbody>
+            <?php 
+            foreach($data as $value): ?>
                 <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td><a href= "edit_category.php"><i class="bi bi-pencil-square"></a></i></td>
-                    <td><a href= ""><i class="bi bi-trash3-fill"></a></i></td>
+                <th scope="row"><?= $value['ma_tloai']; ?></th>
+                <td><?= $value['ten_tloai']; ?></td>
+                <td><a href= "edit_category.php?id=<?= $value['ma_tloai'];?>"><i class="bi bi-pencil-square"></a></i></td>
+                <td><a href= "delete_category.php?id=<?= $value['ma_tloai'];?>" onclick="return confirm('Bạn có chắc chắn muốn xoá?');"><i class="bi bi-trash3-fill"></a></i></td>
                 </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td><a href= "edit_category.php"><i class="bi bi-pencil-square"></a></i></td>
-                    <td><a href= ""><i class="bi bi-trash3-fill"></a></i></td>
-                </tr>
+                <?php endforeach;?>
             </tbody>
         </table>
     </div>
