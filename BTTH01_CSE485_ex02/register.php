@@ -1,39 +1,23 @@
 <?php
-if(isset($_POST['Login'])){
+if(isset($_POST['Register'])){
     $user = $_POST['Username'];
+    $email = $_POST['Email'];
     $pass = $_POST['Pass'];
 
-    //Truy van thong tin:
+    // Băm mật khẩu
+    $hashed_password = password_hash($pass, PASSWORD_DEFAULT);
+
+    // Truy vấn thêm thông tin vào cơ sở dữ liệu
     try{
-        //Buoc 1: Ket noi DBServer
+        // Bước 1: Kết nối DBServer
         $conn = new PDO("mysql:host=localhost;dbname=btth01_cse485", "root", "");
-        //Buoc 2: Thuc hien truy van
-        $sql_check = "SELECT * FROM users WHERE Username = '$user' OR Email = '$user'";
-        $stmt = $conn->prepare($sql_check);
+        // Bước 2: Thực hiện truy vấn thêm thông tin
+        $sql_insert = "INSERT INTO users (Username, Email, Pass) VALUES ('$user', '$email', '$pass')";
+        $stmt = $conn->prepare($sql_insert);
         $stmt->execute();
-        //Buoc 3: Lay ra thong tin bao gom MAT KHAU
-
-        if (!$stmt) {
-            echo "Lỗi truy vấn: " . $conn->errorInfo()[2];
-        } else{
-            if($stmt->rowCount() > 0){
-                $users = $stmt->fetch();
-                //Lay ra mat khau
-                $pass_plain = $users[3];
-                if($pass === $pass_plain){
-                    //CAP THE (authentication - Not: authorization)
-                    session_start();
-                    $_SESSION['isLogin'] = $users[1];
-                    header("Location:admin/index.php");
-                }else{
-                    header("Location:login.php?error=not-matched-password");
-                }
-            }else{
-                header("Location:login.php?error=not-existed");
-            }
-        }
-
-
+        
+        // Đăng ký thành công
+        header("Location: login.php");
     }catch(PDOException $e){
         echo $e->getMessage();
     }
@@ -88,9 +72,6 @@ if(isset($_POST['Login'])){
     footer{
         border: 1px solid black;
     }
-    hr{
-        margin: 0;
-    }
 </style>
 <body>
     <header>
@@ -125,29 +106,22 @@ if(isset($_POST['Login'])){
         ?>
         <div class = "box">
             <h3 style = "color: white">Sign in</h3><hr>
-            <form action="login.php" method="post">
+            <form action="register.php" method="post">
                 <div class="input-group flex-nowrap">
                     <span class="input-group-text" id="addon-wrapping"><i class="bi bi-person-fill"></i></span>
                     <input type="text" class="form-control" placeholder="Username" name ="Username" aria-describedby="addon-wrapping">
                 </div>
                 <div class="input-group flex-nowrap">
                     <span class="input-group-text" id="addon-wrapping"><i class="bi bi-key-fill"></i></span>
+                    <input type="text" class="form-control" placeholder="Email" name ="Email" aria-describedby="addon-wrapping">
+                </div>
+                <div class="input-group flex-nowrap">
+                    <span class="input-group-text" id="addon-wrapping"><i class="bi bi-key-fill"></i></span>
                     <input type="text" class="form-control" placeholder="Password" name ="Pass" aria-describedby="addon-wrapping">
                 </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
-                    <label class="form-check-label" for="flexCheckChecked" style = "color: white">
-                        Remember Me
-                    </label>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end" style="margin-bottom: 60px;">
+                    <button class="btn btn-warning" name = "Register" type = "submit">Register</button>
                 </div>
-                <div class="d-grid gap-2 d-md-flex justify-content-md-end" style="margin-bottom: 65px;">
-                    <button class="btn btn-warning" name = "Login" type = "submit">Login</button>
-                </div>
-                <hr>
-                <center><p>Don't have an account? <a href="#">Sign Up</a></p>
-                <p><a href = "#">Forgot your password?</a></p>
-                <p><a href = "register.php">Register</a></p>
-            </center>
             <form>
         </div>
     </div>

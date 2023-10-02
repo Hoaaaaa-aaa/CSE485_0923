@@ -1,6 +1,6 @@
 <?php
-    if(isset($_GET['ma_tloai'])){
-        $maTheLoai = $_GET['ma_tloai'];
+    if(isset($_GET['id'])){
+        $maTheLoai = $_GET['id'];
 
     try{
         //Buoc 1: Ket noi DBServer
@@ -14,7 +14,7 @@
         $rowCount = $stmt->rowCount();
         if($rowCount>0){
 //          echo "Deleted $rowCount row(s).";
-            header("Location: category.php?success=$maTheLoai");
+            header("Location:category.php?success=$maTheLoai");
         }
 
     }catch(PDOException $e){

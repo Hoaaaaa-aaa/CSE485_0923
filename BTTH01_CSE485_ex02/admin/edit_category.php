@@ -1,4 +1,13 @@
 <?php
+    //Dich vu Bao ve
+    session_start();
+
+    //Kiem tra thong tin để bảo vệ kiểm soát ra vào
+    if(!isset($_SESSION['isLogin'])){
+        header("Location:/Laravel/Pro3/BTTH01_CSE485_ex02/login.php");
+    }
+?>
+<?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Lấy và kiểm tra dữ liệu từ biểu mẫu
     $ma_tloai = $_POST["ma_tloai"];
