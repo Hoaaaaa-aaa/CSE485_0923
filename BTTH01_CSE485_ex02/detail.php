@@ -108,26 +108,28 @@
     </header>
     <div class="card mb-3 m-5" style="max-width: 100%; border:0;">
         <div class="row g-0">
-            <div class="col-md-4">
-                <img src="images/songs/cayvagio.jpg" class="img-fluid" alt="...">
-            </div>
-            <div class="col-md-8">
-                <div class="card-body">
-                <?php
-                // Hiển thị thông tin của bài hát
-                    if ($baiHat) {?>
-                        <h5><?= $baiHat['tieude']?></h5>
-                        <p><b>Bài hát: </b><?= $baiHat['ten_bhat']?></p>
-                        <p><b>Thể loại: </b><?= $tenTheLoai['ten_tloai']?></p>
-                        <p><b>Tóm tắt: </b><?=$baiHat['tomtat']?></p>
-                        <p><b>Nội dung: </b><?=$baiHat['noidung']?></p>
-                        <p><b>Tác giả: </b><?=$tenTacGia['ten_tgia']?></p>
-                    <?php } else {
+            <?php
+            // Hiển thị thông tin của bài hát
+            if ($baiHat) {?>
+                <div class="col-md-4">
+                    <img src="<?= $baiHat['hinhanh'];?>" class="img-fluid" alt="...">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                    
+                            <h5><?= $baiHat['tieude']?></h5>
+                            <p><b>Bài hát: </b><?= $baiHat['ten_bhat']?></p>
+                            <p><b>Thể loại: </b><?= $tenTheLoai['ten_tloai']?></p>
+                            <p><b>Tóm tắt: </b><?=$baiHat['tomtat']?></p>
+                            <p><b>Nội dung: </b><?=$baiHat['noidung']?></p>
+                            <p><b>Tác giả: </b><?=$tenTacGia['ten_tgia']?></p>
+                        
+                    </div>
+                </div>
+            <?php } else {
                         echo "Không tìm thấy bài hát.";
                     }
                     ?>
-                </div>
-            </div>
         </div>
     </div>
     <footer>
