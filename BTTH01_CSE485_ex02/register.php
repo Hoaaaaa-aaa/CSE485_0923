@@ -7,17 +7,28 @@ if(isset($_POST['Register'])){
     // Băm mật khẩu
     $hashed_password = password_hash($pass, PASSWORD_DEFAULT);
 
-    // Truy vấn thêm thông tin vào cơ sở dữ liệu
+    // Truy vấn kiểm tra tên người dùng hoặc email đã tồn tại chưa
     try{
         // Bước 1: Kết nối DBServer
         $conn = new PDO("mysql:host=localhost;dbname=btth01_cse485", "root", "");
-        // Bước 2: Thực hiện truy vấn thêm thông tin
-        $sql_insert = "INSERT INTO users (Username, Email, Pass) VALUES ('$user', '$email', '$pass')";
-        $stmt = $conn->prepare($sql_insert);
-        $stmt->execute();
-        
-        // Đăng ký thành công
-        header("Location: login.php");
+
+        // Kiểm tra tên người dùng hoặc email đã tồn tại trong cơ sở dữ liệu
+        $sql_check = "SELECT * FROM nguoidung WHERE Username = '$user' OR Email = '$email'";
+        $stmt_check = $conn->prepare($sql_check);
+        $stmt_check->execute();
+
+        if($stmt_check->rowCount() > 0){
+            // Tên người dùng hoặc email đã tồn tại, hiển thị thông báo lỗi
+            header("Location: register.php?error=Tên hoặc email đã tồn tại");
+        }else{
+            // Tên người dùng và email chưa tồn tại, thêm thông tin mới vào cơ sở dữ liệu
+            $sql_insert = "INSERT INTO nguoidung (Username, Email, Pass) VALUES ('$user', '$email', '$hashed_password')";
+            $stmt_insert = $conn->prepare($sql_insert);
+            $stmt_insert->execute();
+
+            // Đăng ký thành công
+            header("Location: login.php");
+        }
     }catch(PDOException $e){
         echo $e->getMessage();
     }

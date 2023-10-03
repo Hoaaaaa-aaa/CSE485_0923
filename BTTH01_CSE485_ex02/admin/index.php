@@ -3,8 +3,8 @@
     session_start();
 
     //Kiem tra thong tin để bảo vệ kiểm soát ra vào
-    if(!isset($_SESSION['isLogin'])){
-        header("Location:/Laravel/Pro3/BTTH01_CSE485_ex02/login.php");
+    if(!isset($_SESSION['Login'])){
+        header("Location:../login.php");
     }
 ?>
 <?php
@@ -13,7 +13,7 @@
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         // Truy vấn để đếm số lượng người dùng
-        $stmt_users = $conn->prepare("SELECT COUNT(*) FROM users");
+        $stmt_users = $conn->prepare("SELECT COUNT(*) FROM nguoidung");
         $stmt_users->execute();
         $user_count = $stmt_users->fetchColumn();
 
@@ -89,10 +89,10 @@
                             <a class="nav-link" href="/Laravel/Pro3/BTTH01_CSE485_ex02/index.php"><b>Trang ngoài</b></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="category.php"><b>Thể loại</b></a>
+                            <a class="nav-link" href="category/category.php"><b>Thể loại</b></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#"><b>Tác giả</b></a>
+                            <a class="nav-link" href="author/author.php"><b>Tác giả</b></a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#"><b>Bài viết</b></a>

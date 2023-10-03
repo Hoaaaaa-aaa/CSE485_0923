@@ -8,7 +8,7 @@ if(isset($_POST['Login'])){
         //Buoc 1: Ket noi DBServer
         $conn = new PDO("mysql:host=localhost;dbname=btth01_cse485", "root", "");
         //Buoc 2: Thuc hien truy van
-        $sql_check = "SELECT * FROM users WHERE Username = '$user' OR Email = '$user'";
+        $sql_check = "SELECT * FROM nguoidung WHERE Username = '$user' OR Email = '$user'";
         $stmt = $conn->prepare($sql_check);
         $stmt->execute();
         //Buoc 3: Lay ra thong tin bao gom MAT KHAU
@@ -19,11 +19,11 @@ if(isset($_POST['Login'])){
             if($stmt->rowCount() > 0){
                 $users = $stmt->fetch();
                 //Lay ra mat khau
-                $pass_plain = $users[3];
-                if($pass === $pass_plain){
+                $pass_hash = $users[3];
+                if(password_verify($pass,$pass_hash)){
                     //CAP THE (authentication - Not: authorization)
                     session_start();
-                    $_SESSION['isLogin'] = $users[1];
+                    $_SESSION['Login'] = $users[1];
                     header("Location:admin/index.php");
                 }else{
                     header("Location:login.php?error=not-matched-password");
