@@ -125,7 +125,7 @@ if(isset($_POST['Login'])){
         ?>
         <div class = "box">
             <h3 style = "color: white">Sign in</h3><hr>
-            <form action="login.php" method="post">
+            <form action="login.php" method="POST">
                 <div class="input-group flex-nowrap">
                     <span class="input-group-text" id="addon-wrapping"><i class="bi bi-person-fill"></i></span>
                     <input type="text" class="form-control" placeholder="Username" name ="Username" aria-describedby="addon-wrapping">
@@ -144,9 +144,8 @@ if(isset($_POST['Login'])){
                     <button class="btn btn-warning" name = "Login" type = "submit">Login</button>
                 </div>
                 <hr>
-                <center><p>Don't have an account? <a href="#">Sign Up</a></p>
+                <center><p>Don't have an account? <a href = "register.php">Sign up</a></p>
                 <p><a href = "#">Forgot your password?</a></p>
-                <p><a href = "register.php">Register</a></p>
             </center>
             <form>
         </div>
